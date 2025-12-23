@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Payments | Atlantic Pedia QRIS Gateway</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="icons.js"></script>
+</head>
+<body>
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-container">
+            <div class="loading-animation">
+                <div class="vercel-circle">
+                    <div class="circle-line"></div>
+                    <div class="circle-line"></div>
+                    <div class="circle-line"></div>
+                    <div class="circle-line"></div>
+                    <div class="circle-line"></div>
+                    <div class="circle-line"></div>
+                    <div class="circle-line"></div>
+                    <div class="circle-line"></div>
+                </div>
+            </div>
+            <div class="loading-text">
+                <span class="typing-text" id="loading-status">Initializing Gateway</span>
+                <span class="cursor">|</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div id="logo-icon"></div>
+                <span class="logo-text">My Payments</span>
+            </div>
+            <div class="nav-links">
+                <a href="#create" class="nav-link">
+                    <div id="create-icon"></div>
+                    Create Payment
+                </a>
+                <a href="#history" class="nav-link">
+                    <div id="history-icon"></div>
+                    History
+                </a>
+                <a href="#docs" class="nav-link">
+                    <div id="docs-icon"></div>
+                    API Docs
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">
+                <span class="typewriter" id="typewriter-text">Secure QRIS Payments</span>
+            </h1>
+            <p class="hero-subtitle">Professional Atlantic Pedia gateway for instant Indonesian payments. Fast, secure, and reliable.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div id="stats-icon-1"></div>
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+                <div class="stat">
+                    <div id="stats-icon-2"></div>
+                    <span class="stat-number">Instant</span>
+                    <span class="stat-label">Processing</span>
+                </div>
+                <div class="stat">
+                    <div id="stats-icon-3"></div>
+                    <span class="stat-number">Secure</span>
+                    <span class="stat-label">Transactions</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="create" class="create-section">
+            <div class="section-header">
+                <h2>Create QRIS Payment</h2>
+                <p>Generate QRIS instantly with Atlantic Pedia gateway</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="payment-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="amount">
+                                <div id="amount-icon"></div>
+                                Amount (IDR)
+                            </label>
+                            <div class="input-with-prefix">
+                                <span class="prefix">Rp</span>
+                                <input type="number" id="amount" placeholder="100000" min="1000" max="100000000" required>
+                            </div>
+                            <div class="amount-presets">
+                                <button type="button" class="preset-btn" data-amount="10000">10K</button>
+                                <button type="button" class="preset-btn" data-amount="50000">50K</button>
+                                <button type="button" class="preset-btn" data-amount="100000">100K</button>
+                                <button type="button" class="preset-btn" data-amount="500000">500K</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customer-name">
+                                <div id="customer-icon"></div>
+                                Customer Name (Optional)
+                            </label>
+                            <input type="text" id="customer-name" placeholder="John Doe">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="submit-button primary-button">
+                            <div id="generate-icon"></div>
+                            Generate QRIS
+                        </button>
+                        <button type="button" class="secondary-button" id="clear-form-btn">
+                            <div id="clear-icon"></div>
+                            Clear
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="result" class="result-section" style="display: none;">
+            <div class="result-container">
+                <div class="result-header">
+                    <h3>QRIS Payment Generated</h3>
+                    <div id="success-icon"></div>
+                </div>
+                
+                <div class="result-content">
+                    
+                    <div class="qr-display">
+                        <div class="qr-frame">
+                            <div class="qr-corner qr-corner-tl"></div>
+                            <div class="qr-corner qr-corner-tr"></div>
+                            <img id="qr-image" src="" alt="QRIS Code">
+                            <div class="qr-corner qr-corner-bl"></div>
+                            <div class="qr-corner qr-corner-br"></div>
+                        </div>
+                        <div class="qr-actions">
+                            <button class="action-button" id="download-qr-btn">
+                                <div id="download-icon"></div>
+                                Download QRIS
+                            </button>
+                            <button class="action-button secondary" id="refresh-status-btn">
+                                <div id="refresh-icon"></div>
+                                Check Status
+                            </button>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="payment-details">
+                        <h4>Payment Details</h4>
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <div id="id-icon"></div>
+                                <div class="detail-content">
+                                    <span class="detail-label">Transaction ID</span>
+                                    <span class="detail-value" id="transaction-id">JOOMODS-123456</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div id="amount-detail-icon"></div>
+                                <div class="detail-content">
+                                    <span class="detail-label">Amount</span>
+                                    <span class="detail-value" id="detail-amount">Rp 100,000</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div id="status-icon"></div>
+                                <div class="detail-content">
+                                    <span class="detail-label">Status</span>
+                                    <span class="status-badge" id="payment-status">Pending</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div id="time-icon"></div>
+                                <div class="detail-content">
+                                    <span class="detail-label">Created</span>
+                                    <span class="detail-value" id="created-time">Just now</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="qr-string-section">
+                            <label>QR String</label>
+                            <div class="qr-string-box">
+                                <input type="text" id="qr-string" readonly>
+                                <button class="copy-button" id="copy-qr-btn">
+                                    <div id="copy-icon"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-footer">
+                    <p class="info-text">
+                        <div id="info-icon"></div>
+                        Scan this QR code with any e-wallet app to complete payment
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="section-header">
+                <h2>Why Choose My Payments</h2>
+                <p>Professional features for modern businesses</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div id="feature-1-icon"></div>
+                    <h3>Instant Processing</h3>
+                    <p>Real-time QRIS generation with Atlantic Pedia integration</p>
+                </div>
+                <div class="feature-card">
+                    <div id="feature-2-icon"></div>
+                    <h3>Bank Grade Security</h3>
+                    <p>Encrypted transactions and secure API endpoints</p>
+                </div>
+                <div class="feature-card">
+                    <div id="feature-3-icon"></div>
+                    <h3>Automated Notifications</h3>
+                    <p>Telegram bot integration for instant payment alerts</p>
+                </div>
+                <div class="feature-card">
+                    <div id="feature-4-icon"></div>
+                    <h3>Detailed Analytics</h3>
+                    <p>Comprehensive payment history and reporting tools</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="history" class="history-section">
+            <div class="section-header">
+                <h2>Recent Transactions</h2>
+                <p>Your payment history</p>
+            </div>
+            <div class="history-container">
+                <div class="history-placeholder" id="history-placeholder">
+                    <div id="history-empty-icon"></div>
+                    <p>No transactions yet</p>
+                    <p class="placeholder-sub">Generate your first QRIS payment above</p>
+                </div>
+                <div class="history-list" id="history-list" style="display: none;"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <div id="logo-icon"></div>
+                <span>My Payments</span>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">API Documentation</a>
+                <a href="#" class="footer-link">Support</a>
+            </div>
+            <p class="footer-copyright">© 2024 My Payments. Powered by Atlantic Pedia.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
